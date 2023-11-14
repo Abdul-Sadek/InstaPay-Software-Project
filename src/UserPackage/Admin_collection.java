@@ -1,6 +1,4 @@
 package UserPackage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -10,11 +8,11 @@ public class Admin_collection extends Collection {
         users.remove(userToDelete);
         System.out.println("User deleted: " + userToDelete.getName());
     }
-    private void delete_user(@NotNull User user) {
+    private void delete_user( User user) {
         System.out.println("User deleted: " + user.getName());
     }
 
-    private void edit_user(@NotNull User user, String newName, String newType, String[] newPermissions) {
+    private void edit_user( User user, String newName, String newType, String[] newPermissions) {
         user.setName(newName);
         user.setType(newType);
         user.setPermissions(newPermissions);
@@ -40,7 +38,7 @@ public class Admin_collection extends Collection {
         edit_user_account(account, newMobile, newEmail, newPassword, newType, newBalance);
     }
 
-    private void edit_user_account(@NotNull Account account, String mobile, String email, String password,
+    private void edit_user_account(Account account, String mobile, String email, String password,
                                    AccountType type, double balance) {
         account.setType(type);
         account.setEmail(email);
@@ -50,7 +48,7 @@ public class Admin_collection extends Collection {
         System.out.println("Editing account: " + account.getEmail());
     }
 
-    private void show_users(@NotNull List<User> users) {
+    private void show_users(List<User> users) {
         System.out.println("List of users:");
 
         for (User user : users) {
@@ -58,11 +56,11 @@ public class Admin_collection extends Collection {
         }
     }
 
-    private void show_user_data(@NotNull User user) {
+    private void show_user_data(User user) {
         user.x.view_profile(user);
     }
 
-    private @Nullable User findUserByid(List<User> users, int id) {
+    private User findUserByid(List<User> users, int id) {
         for (User user : users) {
             if (user.getUserId() == id) {
                 return user;

@@ -1,5 +1,8 @@
 package UserPackage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String name;
     public Collection x;
@@ -7,6 +10,8 @@ public class User {
     private int user_id;
     private String[] permissions;
     private Account[] accounts;
+
+
 
     public String getName() {
         return name;
@@ -35,6 +40,14 @@ public class User {
     public void setUserId(int user_id) {
         this.user_id = user_id;
     }
+    public void Add_Acc(Account acc){
+        for (int i = 0; i < accounts.length; i++) {
+            if (accounts[i] == null) {
+                accounts[i] = acc;
+                break;
+            }
+        }
+    }
 
     public String[] getPermissions() {
         return permissions;
@@ -43,12 +56,17 @@ public class User {
     public void setPermissions(String[] permissions) {
         this.permissions = permissions;
     }
-
     public Account[] getAccounts() {
         return accounts;
     }
-
-    public void setAccounts(Account[] accounts) {
-        this.accounts = accounts;
+    public BankAccount[] getbankAccounts() {
+        List<BankAccount> banks = new ArrayList<>();
+       for(Account acc:accounts){
+           if(acc.getType()==AccountType.BANK_ACCOUNT){
+               banks.add((BankAccount) acc);
+           }
+       }
+        return banks.toArray(new BankAccount[0]);
     }
+
 }

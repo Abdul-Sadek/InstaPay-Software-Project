@@ -1,14 +1,35 @@
 package UserPackage;
-
+import System.BankAuthenticator;
 import java.util.Scanner;
-
+import System.BankAuthenticator;
 public class Client_collection extends Collection {
-
+    BankAuthenticator ba;
+    Client current_Client;
+    public Client_collection(BankAuthenticator ba){
+        this.ba=ba;
+    }
     public void sync_with_bank_api(Account account) {
-        // Implement synchronization with the bank API logic here
-        // You might want to update account details or perform other operations
-        System.out.println("Syncing with the bank API for account: " + account.getMobileNumber());
-        // Add your synchronization logic here
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter card number: ");
+        String card_num = scanner.nextLine();
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+        if (ba.authenticate(username, password, card_num)) {
+            System.out.println("Syncing with the bank API for account: " + card_num);
+            for (Account acc : current_Client.getAccounts()) {
+                if (acc.getType() == AccountType.NORMAL_ACCOUNT) {
+                    BankAccount ba=new BankAccount(acc.getMobileNumber(),acc.getEmail(),acc.getPassword(),AccountType.BANK_ACCOUNT,card_num,username,password);
+                    current_Client.Add_Acc(ba);
+                    break;
+                }
+            }
+
+
+            // Add your synchronization logic here
+        }
     }
 
     public double inquire_balance(Account account) {
@@ -32,20 +53,20 @@ public class Client_collection extends Collection {
     }
 
 
-    public void withdraw(Account account, double amount) {
-        if (amount < 0) {
-            System.out.println("Error: Withdrawal amount must be non-negative.");
-            return;
-        }
-
-        if (amount > account.getBalance()) {
-            System.out.println("Error: Insufficient funds to withdraw the specified amount.");
-            return;
-        }
-
-        account.setBalance(account.getBalance() - amount);
-
-        System.out.println("Withdrawal successful. Updated balance: $" + account.getBalance());
+    public void withdraw(double amount) {
+//        if (amount < 0) {
+//            System.out.println("Error: Withdrawal amount must be non-negative.");
+//            return;
+//        }
+//
+//        if (amount > account.getBalance()) {
+//            System.out.println("Error: Insufficient funds to withdraw the specified amount.");
+//            return;
+//        }
+//
+//        account.setBalance(account.getBalance() - amount);
+//
+//        System.out.println("Withdrawal successful. Updated balance: $" + account.getBalance());
     }
 
     public void deposit(Account account, double amount) {
@@ -104,7 +125,7 @@ public class Client_collection extends Collection {
             case 4 -> {
                 System.out.println("Enter withdrawal amount:");
                 double withdrawalAmount = scanner.nextDouble();
-                withdraw(account, withdrawalAmount);
+                withdraw(withdrawalAmount);
             }
             case 5 -> {
                 System.out.println("Enter deposit amount:");

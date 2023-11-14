@@ -1,7 +1,6 @@
 package UserPackage;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class User {
     private String name;
@@ -68,5 +67,4 @@ public class User {
        }
         return banks.toArray(new BankAccount[0]);
     }
-
 }

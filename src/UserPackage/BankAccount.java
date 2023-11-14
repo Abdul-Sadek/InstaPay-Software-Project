@@ -36,6 +36,4 @@ public class BankAccount extends Account{
     public void setBankBass(String bankbass) {
         this.bank_bass = bankbass;
     }
-
-
 }

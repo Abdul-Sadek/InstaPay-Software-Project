@@ -1,5 +1,4 @@
 package UserPackage;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,7 +62,7 @@ public class Admin_collection extends Collection {
         user.x.view_profile(user);
     }
 
-    private @Nullable User findUserByName(List<User> users, int id) {
+    private @Nullable User findUserByid(List<User> users, int id) {
         for (User user : users) {
             if (user.getUserId() == id) {
                 return user;
@@ -87,8 +86,8 @@ public class Admin_collection extends Collection {
         switch (choice) {
             case 1 -> {
                 System.out.println("Enter user name to delete:");
-                String userNameToDelete = scanner.next();
-                User userToDelete = findUserByName(users, userNameToDelete);
+                int id = scanner.nextInt();
+                User userToDelete = findUserByid(users, id);
                 if (userToDelete != null) {
                     users.remove(userToDelete);
                 } else {
@@ -97,8 +96,8 @@ public class Admin_collection extends Collection {
             }
             case 2 -> {
                 System.out.println("Enter user name to edit:");
-                String userNameToEdit = scanner.next();
-                User userToEdit = findUserByName(users, userNameToEdit);
+                int id = scanner.nextInt();
+                User userToEdit = findUserByid(users, id);
                 if (userToEdit != null) {
                     System.out.println("Enter new name:");
                     String newName = scanner.next();
@@ -111,8 +110,8 @@ public class Admin_collection extends Collection {
             }
             case 3 -> {
                 System.out.println("Enter user name to edit account:");
-                String userNameToEditAccount = scanner.next();
-                User userToEditAccount = findUserByName(users, userNameToEditAccount);
+                int id = scanner.nextInt();
+                User userToEditAccount = findUserByid(users, id);
                 if (userToEditAccount != null) {
                     // Assume user has only one account for simplicity
                     Account userAccount = userToEditAccount.getAccounts()[0];
@@ -124,8 +123,8 @@ public class Admin_collection extends Collection {
             case 4 -> show_users(users);
             case 5 -> {
                 System.out.println("Enter user name to show data:");
-                String userNameToShowData = scanner.next();
-                User userToShowData = findUserByName(users, userNameToShowData);
+                int id = scanner.nextInt();
+                User userToShowData = findUserByid(users, id);
                 if (userToShowData != null) {
                     show_user_data(userToShowData);
                 } else {

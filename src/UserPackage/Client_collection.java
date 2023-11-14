@@ -1,15 +1,18 @@
 package UserPackage;
 import System.BankAuthenticator;
+
+import java.util.Objects;
 import java.util.Scanner;
 import System.BankAuthenticator;
 public class Client_collection extends Collection {
     BankAuthenticator ba;
     Client current_Client;
+    Scanner scanner = new Scanner(System.in);
     public Client_collection(BankAuthenticator ba){
         this.ba=ba;
     }
     public void sync_with_bank_api(Account account) {
-        Scanner scanner = new Scanner(System.in);
+
 
         System.out.print("Enter card number: ");
         String card_num = scanner.nextLine();
@@ -54,19 +57,28 @@ public class Client_collection extends Collection {
 
 
     public void withdraw(double amount) {
-//        if (amount < 0) {
-//            System.out.println("Error: Withdrawal amount must be non-negative.");
-//            return;
-//        }
-//
-//        if (amount > account.getBalance()) {
-//            System.out.println("Error: Insufficient funds to withdraw the specified amount.");
-//            return;
-//        }
-//
-//        account.setBalance(account.getBalance() - amount);
-//
-//        System.out.println("Withdrawal successful. Updated balance: $" + account.getBalance());
+        AccountType type;
+        int choice;
+        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc" );
+        choice= scanner.nextInt();
+        if(choice==1){
+            String card_num;
+            System.out.println("Enter card number : ");
+            card_num= scanner.nextLine();
+            boolean flag=false;
+            for(BankAccount acc : current_Client.getbankAccounts()){
+                if(Objects.equals(card_num, acc.getCardNum())){
+                    ba.withdraw_money(acc,amount);
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag){
+                System.out.println("invalid card number !!");
+            }
+
+        }
+
     }
 
     public void deposit(Account account, double amount) {
@@ -102,7 +114,6 @@ public class Client_collection extends Collection {
     }
 
     public void run(Account account) {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Choose an action:");
         System.out.println("1. Synchronize with bank API");

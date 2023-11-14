@@ -1,5 +1,8 @@
 package UserPackage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String name;
     public Collection x;
@@ -55,6 +58,15 @@ public class User {
     }
     public Account[] getAccounts() {
         return accounts;
+    }
+    public BankAccount[] getbankAccounts() {
+        List<BankAccount> banks = new ArrayList<>();
+       for(Account acc:accounts){
+           if(acc.getType()==AccountType.BANK_ACCOUNT){
+               banks.add((BankAccount) acc);
+           }
+       }
+        return banks.toArray(new BankAccount[0]);
     }
 
 }

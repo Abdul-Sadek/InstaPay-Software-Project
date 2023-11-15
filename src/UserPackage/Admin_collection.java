@@ -19,34 +19,7 @@ public class Admin_collection extends Collection {
         System.out.println("Editing user: " + user.getName());
     }
 
-    private void edit_user_account(Account account) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter new mobile number:");
-        String newMobile = scanner.next();
-        System.out.println("Enter new email:");
-        String newEmail = scanner.next();
-        System.out.println("Enter new password:");
-        String newPassword = scanner.next();
-        System.out.println("Enter new account type (WALLET_ACCOUNT or BANK_ACCOUNT):");
-        String newTypeString = scanner.next();
-        AccountType newType = AccountType.valueOf(newTypeString.toUpperCase()); // Convert string to enum
-
-        System.out.println("Enter new balance:");
-        double newBalance = scanner.nextDouble();
-
-        edit_user_account(account, newMobile, newEmail, newPassword, newType, newBalance);
-    }
-
-    private void edit_user_account(Account account, String mobile, String email, String password,
-                                   AccountType type, double balance) {
-        account.setType(type);
-        account.setEmail(email);
-        //account.setBalance(balance);
-        account.setMobileNumber(mobile);
-        account.setPassword(password);
-        System.out.println("Editing account: " + account.getEmail());
-    }
 
     private void show_users(List<User> users) {
         System.out.println("List of users:");
@@ -107,16 +80,7 @@ public class Admin_collection extends Collection {
                 }
             }
             case 3 -> {
-                System.out.println("Enter user name to edit account:");
-                int id = scanner.nextInt();
-                User userToEditAccount = findUserByid(users, id);
-                if (userToEditAccount != null) {
-                    // Assume user has only one account for simplicity
-                    Account userAccount = userToEditAccount.getAccounts()[0];
-                    edit_user_account(userAccount);
-                } else {
-                    System.out.println("User not found.");
-                }
+
             }
             case 4 -> show_users(users);
             case 5 -> {

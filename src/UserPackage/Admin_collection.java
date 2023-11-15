@@ -1,27 +1,22 @@
 package UserPackage;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
-public class Admin_collection extends Collection {
+public class Admin_Collection extends Collection {
 
-    private void delete_user(List<User> users, User userToDelete) {
+    private void deleteUser(List<User> users, User userToDelete) {
         users.remove(userToDelete);
         System.out.println("User deleted: " + userToDelete.getName());
     }
-    private void delete_user( User user) {
-        System.out.println("User deleted: " + user.getName());
-    }
 
-    private void edit_user( User user, String newName, String newType, String[] newPermissions) {
+    private void editUser(User user, String newName, String newType) {
         user.setName(newName);
         user.setType(newType);
-        user.setPermissions(newPermissions);
         System.out.println("Editing user: " + user.getName());
     }
 
-
-
-    private void show_users(List<User> users) {
+    private void showUsers(List<User> users) {
         System.out.println("List of users:");
 
         for (User user : users) {
@@ -29,11 +24,11 @@ public class Admin_collection extends Collection {
         }
     }
 
-    private void show_user_data(User user) {
+    private void showUserData(User user) {
         user.x.viewProfile(user);
     }
 
-    private User findUserByid(List<User> users, int id) {
+    private User findUserById(List<User> users, int id) {
         for (User user : users) {
             if (user.getUserId() == id) {
                 return user;
@@ -56,47 +51,48 @@ public class Admin_collection extends Collection {
 
         switch (choice) {
             case 1 -> {
-                System.out.println("Enter user name to delete:");
+                System.out.println("Enter user ID to delete:");
                 int id = scanner.nextInt();
-                User userToDelete = findUserByid(users, id);
+                User userToDelete = findUserById(users, id);
                 if (userToDelete != null) {
-                    users.remove(userToDelete);
+                    deleteUser(users, userToDelete);
                 } else {
                     System.out.println("User not found.");
                 }
             }
             case 2 -> {
-                System.out.println("Enter user name to edit:");
+                System.out.println("Enter user ID to edit:");
                 int id = scanner.nextInt();
-                User userToEdit = findUserByid(users, id);
+                User userToEdit = findUserById(users, id);
                 if (userToEdit != null) {
                     System.out.println("Enter new name:");
                     String newName = scanner.next();
                     System.out.println("Enter new type:");
                     String newType = scanner.next();
-                    edit_user(userToEdit, newName, newType, null);
+                    editUser(userToEdit, newName, newType);
                 } else {
                     System.out.println("User not found.");
                 }
             }
             case 3 -> {
-
+                // Implement case 3 logic
+                System.out.println("Editing user account");
             }
-            case 4 -> show_users(users);
+            case 4 -> showUsers(users);
             case 5 -> {
-                System.out.println("Enter user name to show data:");
+                System.out.println("Enter user ID to show data:");
                 int id = scanner.nextInt();
-                User userToShowData = findUserByid(users, id);
+                User userToShowData = findUserById(users, id);
                 if (userToShowData != null) {
-                    show_user_data(userToShowData);
+                    showUserData(userToShowData);
                 } else {
                     System.out.println("User not found.");
                 }
             }
             default -> System.out.println("Invalid choice. Please choose a valid action.");
         }
+
+        scanner.close(); // Close the scanner
         return users;
     }
-
-
 }

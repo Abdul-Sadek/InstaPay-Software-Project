@@ -1,10 +1,12 @@
 package UserPackage;
 
-public class BankAccount extends Account {
+public class BankAccount {
     private String cardNum;
     private String userName;
     private String bankBass;
     private boolean isActive;
+    private double balance;
+    private AccountType type;
 
     // Default constructor
     public BankAccount() {
@@ -17,7 +19,6 @@ public class BankAccount extends Account {
 
     // Parameterized constructor
     public BankAccount(String mobileNumber, String password, String name, String email, String cardNum, String userName, String bankBass) {
-        super(mobileNumber, password, name, email);
         this.cardNum = cardNum;
         this.userName = userName;
         this.bankBass = bankBass;
@@ -56,12 +57,16 @@ public class BankAccount extends Account {
     public void setActive(boolean isActive) {
         this.isActive = isActive;
     }
+    // Getter methods
+    public double getBalance() {
+        return balance;
+    }
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 
     public void print() {
         System.out.println("Bank Account Information:");
-        System.out.println("Name: " + getName());
-        System.out.println("Mobile Number: " + getMobileNumber());
-        System.out.println("Email: " + getEmail());
         System.out.println("Card Number: " + cardNum);
         System.out.println("Username: " + userName);
         System.out.println("Bank Name: " + bankBass);

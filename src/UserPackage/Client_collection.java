@@ -21,8 +21,7 @@ public class Client_collection extends Collection {
     public Client_collection(BankAuthenticator ba){
         this.ba=ba;
     }
-    public void sync_with_bank_api(Account account) {
-
+    public void sync_with_bank_api() {
 
         System.out.print("Enter card number: ");
         String card_num = scanner.nextLine();
@@ -32,6 +31,7 @@ public class Client_collection extends Collection {
         String password = scanner.nextLine();
         if (ba.authenticate(username, password, card_num)) {
             System.out.println("Syncing with the bank API for account: " + card_num);
+            current_Client.bankAccount.setBalance(0);
             current_Client.bankAccount.setCardNum(card_num);
             current_Client.bankAccount.setUserName(username);
             current_Client.bankAccount.setBankBass(password);
@@ -123,7 +123,7 @@ public class Client_collection extends Collection {
         int choice = scanner.nextInt();
 
         switch (choice) {
-            case 1 -> sync_with_bank_api(account);
+            case 1 -> sync_with_bank_api();
             case 2 -> System.out.println("Current balance: $" + inquire_balance(account));
             case 3 -> {
                 System.out.println("Enter bill amount:");

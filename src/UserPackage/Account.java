@@ -7,6 +7,8 @@ public class Account {
     protected String email;
     protected double balance;
 
+    protected AccountType type;
+
     // default constructor
     public Account() {
         mobileNumber = "";
@@ -56,5 +58,11 @@ public class Account {
     }
     public void setBalance(double v) {
         this.balance = v;
+    }
+    public AccountType getType() {
+        return type;
+    }
+    public void setType(AccountType type) {
+        this.type = type;
     }
 }

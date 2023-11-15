@@ -1,7 +1,7 @@
 package UserPackage;
 
 public enum AccountType {
-    BANK,
     WALLET,
-    ADMIN;
+    ADMIN, BANK_ACCOUNT,
+    InstaPay;
 }

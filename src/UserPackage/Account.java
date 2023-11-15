@@ -1,12 +1,28 @@
 package UserPackage;
 
-public abstract class Account {
+public class Account {
     protected String mobileNumber;
     protected String password;
     protected String name;
     protected String email;
-     protected AccountType type;
     protected double balance;
+
+    // default constructor
+    public Account() {
+        mobileNumber = "";
+        password = "";
+        name = "";
+        email = "";
+        balance = 0;
+    }
+    // parameterized constructor
+    public Account(String mobileNumber, String password, String name, String email) {
+        this.mobileNumber = mobileNumber;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.balance = 0;
+    }
 
     public String getMobileNumber() {
         return mobileNumber;
@@ -19,9 +35,6 @@ public abstract class Account {
     }
     public String getEmail() {
         return email;
-    }
-    public AccountType getType() {
-        return type;
     }
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
@@ -38,8 +51,10 @@ public abstract class Account {
         }
     }
     // determine if bank or wallet or admin or any other type
-    public void setType(AccountType type) {
-        this.type = type;
+    public double getBalance() {
+        return balance;
     }
-    public abstract double getBalance(User user);
+    public void setBalance(double v) {
+        this.balance = v;
+    }
 }

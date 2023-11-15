@@ -9,6 +9,16 @@ public abstract class Bill {
     protected double generatorTax;
     protected User receiver;
     protected boolean isPaid;
+
+    // parameterized constructor
+    public Bill(double amount, BillType type, String date, double generator, User receiver, boolean isPaid) {
+        this.amount = amount;
+        this.type = type;
+        this.date = date;
+        this.generatorTax = generator;
+        this.receiver = receiver;
+        this.isPaid = isPaid;
+    }
     public double getAmount() {
         return amount;
     }

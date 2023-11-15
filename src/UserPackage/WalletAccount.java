@@ -21,10 +21,6 @@ public class WalletAccount {
     public void setWalletAccountNumber(int walletAccountNumber) {
         this.walletAccountNumber = walletAccountNumber;
     }
-    // get the balance of the wallet
-    public double getBalance(WalletAccount account) {
-        return account.balance;
-    }
     // get the wallet provider
     public String getWalletProvider(WalletAccount account) {
         return account.walletProvider;

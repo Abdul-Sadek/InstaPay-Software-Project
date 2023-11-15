@@ -5,12 +5,19 @@ public class BankAccount extends Account{
     private String user_name;
     private String bank_bass;
 
-
-    public BankAccount(String mobileNumber, String email, String password, AccountType type , String cardnum, String username, String bankbass ) {
-        super(mobileNumber, email, password, type);
-        this.card_num=cardnum;
-        this.user_name=username;
-        this.bank_bass=bankbass;
+    // default constructor
+    public BankAccount() {
+        super();
+        card_num="";
+        user_name="";
+        bank_bass="";
+    }
+    // parameterized constructor
+    public BankAccount(String mobileNumber, String password, String name, String email, String card_num, String user_name, String bank_bass) {
+        super(mobileNumber, password, name, email);
+        this.card_num = card_num;
+        this.user_name = user_name;
+        this.bank_bass = bank_bass;
     }
     public String getCardNum() {
         return card_num;
@@ -35,5 +42,9 @@ public class BankAccount extends Account{
 
     public void setBankBass(String bankbass) {
         this.bank_bass = bankbass;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

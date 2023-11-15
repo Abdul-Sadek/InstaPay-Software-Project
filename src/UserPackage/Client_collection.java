@@ -8,6 +8,16 @@ public class Client_collection extends Collection {
     BankAuthenticator ba;
     Client current_Client;
     Scanner scanner = new Scanner(System.in);
+
+    // default constructor
+    public Client_collection() {
+        this.current_Client = new Client();
+    }
+
+    // constructor
+    public Client_collection(Client current_Client){
+        this.current_Client=current_Client;
+    }
     public Client_collection(BankAuthenticator ba){
         this.ba=ba;
     }
@@ -22,16 +32,10 @@ public class Client_collection extends Collection {
         String password = scanner.nextLine();
         if (ba.authenticate(username, password, card_num)) {
             System.out.println("Syncing with the bank API for account: " + card_num);
-            for (Account acc : current_Client.getAccounts()) {
-                if (acc.getType() == AccountType.NORMAL_ACCOUNT) {
-                    BankAccount ba=new BankAccount(acc.getMobileNumber(),acc.getEmail(),acc.getPassword(),AccountType.BANK_ACCOUNT,card_num,username,password);
-                    current_Client.Add_Acc(ba);
-                    break;
-                }
-            }
-
-
-            // Add your synchronization logic here
+            current_Client.bankAccount.setCardNum(card_num);
+            current_Client.bankAccount.setUserName(username);
+            current_Client.bankAccount.setBankBass(password);
+            System.out.println("Sync successful.");
         }
     }
 
@@ -50,7 +54,8 @@ public class Client_collection extends Collection {
             return;
         }
 
-        account.setBalance(account.getBalance() - amount);
+//        BankAccount.setBalance(BankAccount.getBalance() - amount);
+//        current_Client.getbankAccounts()
 
         System.out.println("Bill payment successful. Updated balance: $" + account.getBalance());
     }
@@ -62,23 +67,15 @@ public class Client_collection extends Collection {
         System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc" );
         choice= scanner.nextInt();
         if(choice==1){
-            String card_num;
-            System.out.println("Enter card number : ");
-            card_num= scanner.nextLine();
-            boolean flag=false;
-            for(BankAccount acc : current_Client.getbankAccounts()){
-                if(Objects.equals(card_num, acc.getCardNum())){
-                    ba.withdraw_money(acc,amount);
-                    flag=true;
-                    break;
-                }
+            if(current_Client.bankAccount.getCardNum().equals("")) {
+                System.out.println("You don't have a bank account");
+                return;
             }
-            if(!flag){
-                System.out.println("invalid card number !!");
+            else {
+                ba.withdraw_money(current_Client.bankAccount,amount);
+                current_Client.bankAccount.setBalance(current_Client.bankAccount.getBalance() + amount);
             }
-
         }
-
     }
 
     public void deposit(Account account, double amount) {
@@ -89,7 +86,7 @@ public class Client_collection extends Collection {
 
         double currentBalance = account.getBalance();
 
-        account.setBalance(currentBalance + amount);
+        current_Client.bankAccount.setBalance(currentBalance + amount);
 
         System.out.println("Deposit successful. Updated balance: $" + account.getBalance());
     }
@@ -148,7 +145,7 @@ public class Client_collection extends Collection {
                 double transferAmount = scanner.nextDouble();
                 System.out.println("Enter destination account details:");
                 // Simulate getting destination account details (replace this with your actual logic)
-                Account destinationAccount = new Account("DestinationMobileNumber", "destination@example.com", "destination_password", AccountType.BANK_ACCOUNT);
+                Account destinationAccount = new Account();
                 transfer_money(transferAmount, account, destinationAccount);
             }
             default -> System.out.println("Invalid choice. Please choose a valid action.");

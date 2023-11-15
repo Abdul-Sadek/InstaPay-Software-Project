@@ -42,7 +42,7 @@ public class Admin_collection extends Collection {
                                    AccountType type, double balance) {
         account.setType(type);
         account.setEmail(email);
-        account.setBalance(balance);
+        //account.setBalance(balance);
         account.setMobileNumber(mobile);
         account.setPassword(password);
         System.out.println("Editing account: " + account.getEmail());

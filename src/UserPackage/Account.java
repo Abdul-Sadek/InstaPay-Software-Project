@@ -5,7 +5,7 @@ public class Account {
     private String password;
     private String name;
     private String email;
-    private double balance;
+//    private double balance;
     private AccountType type;
 
     // default constructor
@@ -19,7 +19,7 @@ public class Account {
         this.password = password;
         this.name = name;
         setEmail(email);
-        this.balance = 0;
+//        this.balance = 0;
     }
 
     public String getMobileNumber() {
@@ -58,13 +58,13 @@ public class Account {
         }
     }
 
-    public double getBalance() {
-        return balance;
-    }
+//    public double getBalance() {
+//        return balance;
+//    }
 
-    public void setBalance(double initialBalance) {
-        this.balance = initialBalance;
-    }
+//    public void setBalance(double initialBalance) {
+//        this.balance = initialBalance;
+//    }
 
     public AccountType getType() {
         return type;

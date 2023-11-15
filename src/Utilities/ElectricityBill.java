@@ -1,12 +1,15 @@
 package Utilities;
 
+import UserPackage.Client;
 import UserPackage.User;
 
 public class ElectricityBill extends Bill{
 
-    public ElectricityBill() {
-        this.generatorTax = 1.5;
+    // parameterized constructor
+    public ElectricityBill(double amount, BillType type, String date, double generator, Client receiver, boolean isPaid) {
+        super(amount, type, date, generator, receiver, isPaid);
     }
+
     public double calculateBill() {
         return amount*generatorTax;
     }

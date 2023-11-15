@@ -3,129 +3,110 @@ package System;
 import UserPackage.Admin;
 import UserPackage.Client;
 import UserPackage.User;
-import Utilities.Bill;
-import Utilities.BillType;
-import Utilities.GasBill;
+import Utilities.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataBase {
-    private final Client[] clients;
-    private final Bill[] bills;
-    private final String[] systemLogs;
-    private final Admin[] admins;
+    private final List<Client> clients;
+    private final List<Bill> bills;
+    private final List<String> systemLogs;
+    private final List<Admin> admins;
 
     // initialize the database size
     public DataBase() {
-        clients = new Client[100];
-        bills = new Bill[100];
-        systemLogs = new String[100];
-        admins = new Admin[100];
+        clients = new ArrayList<>();
+        bills = new ArrayList<>();
+        systemLogs = new ArrayList<>();
+        admins = new ArrayList<>();
+        // String mobileNumber, String password, String name, String email, String address, String phoneNumber
+        Client client1 = new Client("1234567890", "password1", "John Doe", "john@example.com", "123 Main St", "9876543210");
+        Client client2 = new Client("9876543210", "password2", "Alice Smith", "alice@example.com", "456 Elm St", "1234567890");
+        Client client3 = new Client("1112223333", "password3", "Bob Johnson", "bob@example.com", "789 Oak St", "5556667777");
 
-        // Sample clients
-        clients[0] = new Client("Ahmed", "ahmed", "123", "Cairo", "01234567890", "hend@mail.com");
+        // Adding the sample clients to the database
+        addClient(client1);
+        addClient(client2);
+        addClient(client3);
 
-        // Sample bills
-        bills[0] = new GasBill(100, BillType.ELECTRICITY, "1/1/2021", 0.14, clients[0], true);
+       //  double amount, BillType type, String date, double generator, User receiver, boolean isPaid
+        Bill bill1 = new GasBill(100, BillType.GAS, "2021-01-01", 0.1, client1, false);
+        Bill bill2 = new WaterBill(200, BillType.WATER, "2021-01-01", 0.2, client2, false);
+        Bill bill3 = new ElectricityBill(300, BillType.GAS, "2021-01-01", 0.3, client3, false);
+        // Adding the sample bills to the database
+        addBill(bill1);
+        addBill(bill2);
+        addBill(bill3);
 
-        // Sample system logs
-        systemLogs[0] = "Log entry 1";
-        systemLogs[1] = "Log entry 2";
+        // Filling system logs with sample data
+        addLog("System initialized.");
+        addLog("Client data loaded.");
+        addLog("Bills data loaded.");
+        addLog("Admins data loaded.");
+
+        // Any other relevant log entries based on system events or actions
+        addLog("User authentication module updated.");
+        addLog("New bill generated.");
+        addLog("System maintenance scheduled for next week.");
+
+
+        // Sample admins with attributes: (name, username, password)
+        Admin admin1 = new Admin("Admin1", "Admin55", "admin5632");
+        Admin admin2 = new Admin("Admin 2", "admin63", "admin5847");
+
+        // Adding the sample admins to the database
+        addAdmin(admin1);
+        addAdmin(admin2);
     }
 
     // add a client to the database
     public void addClient(Client client) {
-        // to find an empty index to add the client to the database
-        // this is done to avoid null pointer exception
-        for (int i = 0; i < clients.length; i++) {
-            // if the current index is empty
-            if (clients[i] == null) {
-                clients[i] = client;
-                break;
-            }
-        }
+        clients.add(client);
     }
 
     // delete a client from the database
     public void deleteClient(Client client) {
-        // to find the client index to delete it from the database
-        for (int i = 0; i < clients.length; i++) {
-            // if the current index is not empty
-            if (clients[i] != null) {
-                // if the current index is the client to be deleted
-                if (clients[i].equals(client)) {
-                    clients[i] = null;
-                    break;
-                }
-            }
-        }
+        clients.remove(client);
     }
 
     // add a bill to the database
     public void addBill(Bill bill) {
-        // to find an empty index to add the bill to the database
-        // this is done to avoid null pointer exception
-        for (int i = 0; i < bills.length; i++) {
-            // if the current index is empty
-            if (bills[i] == null) {
-                bills[i] = bill;
-                break;
-            }
-        }
+        bills.add(bill);
     }
 
     // edit client data in the database
     // passing the client after editing its data
     public void editClient(Client client) {
-        // to find the client index to edit it in the database
-        for (int i = 0; i < clients.length; i++) {
-            // if the current index is not empty
-            if (clients[i] != null) {
-                // if the current index is the client to be edited
-                if (clients[i].equals(client)) {
-                    clients[i] = client;
-                    break;
-                }
-            }
+        int index = clients.indexOf(client);
+        if (index != -1) {
+            clients.set(index, client);
         }
     }
 
     // adding a log to the system logs as a string
     public void addLog(String log) {
-        // this is done to avoid null pointer exception
-        for (int i = 0; i < systemLogs.length; i++) {
-            // if the current index is empty
-            if (systemLogs[i] == null) {
-                systemLogs[i] = log;
-                break;
-            }
-        }
+        systemLogs.add(log);
     }
 
     // add an admin to the database
     public void addAdmin(Admin admin) {
-        for (int i = 0; i < admins.length; i++) {
-            // if the current index is empty
-            if (admins[i] == null) {
-                admins[i] = admin;
-                break;
-            }
-        }
+        admins.add(admin);
     }
 
-    public List<User> getClients() {
-        return List.of(clients);
+    public List<Client> getClients() {
+        return new ArrayList<>(clients);
     }
 
-    public Bill[] getBills() {
-        return bills;
+    public List<Bill> getBills() {
+        return new ArrayList<>(bills);
     }
 
-    public String[] getSystemLogs() {
-        return systemLogs;
+    public List<String> getSystemLogs() {
+        return new ArrayList<>(systemLogs);
     }
 
     public List<Admin> getAdmins() {
-        return List.of(admins);
+        return new ArrayList<>(admins);
     }
 }

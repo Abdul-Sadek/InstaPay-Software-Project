@@ -20,11 +20,13 @@ public class Admin_collection extends Collection {
         System.out.println("Editing user: " + user.getName());
     }
 
-    private void show_users(List<User> users) {
+    private void show_users(List<Client> users) {
         System.out.println("List of users:");
 
-        for (User user : users) {
-            System.out.println("User: " + user.getName() + ", Type: " + user.getType());
+        for (Client user : users) {
+            // print client data
+            System.out.println("User ID: " + user.getUserId());
+            System.out.println("User name: " + user.getName());
         }
     }
 
@@ -32,8 +34,8 @@ public class Admin_collection extends Collection {
         user.x.viewProfile(user);
     }
 
-    private User findUserByid(List<User> users, int id) {
-        for (User user : users) {
+    private Client findUserByid(List<Client> users, int id) {
+        for (Client user : users) {
             if (user.getUserId() == id) {
                 return user;
             }
@@ -162,7 +164,7 @@ public class Admin_collection extends Collection {
     }
 
 
-    public List<User> run(List<User> users) {
+    public List<Client> run(List<Client> users) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Choose an action:");
@@ -178,7 +180,7 @@ public class Admin_collection extends Collection {
             case 1 -> {
                 System.out.println("Enter user name to delete:");
                 int id = scanner.nextInt();
-                User userToDelete = findUserByid(users, id);
+                Client userToDelete = findUserByid(users, id);
                 if (userToDelete != null) {
                     users.remove(userToDelete);
                 } else {

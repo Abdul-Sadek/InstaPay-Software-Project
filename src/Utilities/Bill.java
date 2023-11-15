@@ -1,5 +1,6 @@
 package Utilities;
 
+import UserPackage.Client;
 import UserPackage.User;
 
 public abstract class Bill {
@@ -11,7 +12,7 @@ public abstract class Bill {
     protected boolean isPaid;
 
     // parameterized constructor
-    public Bill(double amount, BillType type, String date, double generator, User receiver, boolean isPaid) {
+    public Bill(double amount, BillType type, String date, double generator, Client receiver, boolean isPaid) {
         this.amount = amount;
         this.type = type;
         this.date = date;

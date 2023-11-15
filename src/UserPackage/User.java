@@ -18,6 +18,7 @@ public class User {
         type = "";
         user_id = 0;
         permissions = new String[0];
+        account = new Account();
     }
 
     public User(String name, String username, String password) {
@@ -26,6 +27,7 @@ public class User {
         this.type = "Client";
         this.user_id = 0;
         this.permissions = new String[0];
+        this.account = new Account(username, password, name, "");
     }
 
 

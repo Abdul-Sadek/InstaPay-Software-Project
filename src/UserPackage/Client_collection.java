@@ -14,6 +14,7 @@ public class Client_collection extends Collection {
 
     public void sync_with_bank_api(Client current_Client, BankAuthenticator ba) {
 
+        scanner.nextLine();
         System.out.print("Enter card number: ");
         String card_num = scanner.nextLine();
         System.out.print("Enter username: ");
@@ -26,6 +27,7 @@ public class Client_collection extends Collection {
             current_Client.bankAccount.setCardNum(card_num);
             current_Client.bankAccount.setUserName(username);
             current_Client.bankAccount.setBankBass(password);
+            current_Client.bankAccount.setActive(true);
             System.out.println("Sync successful.");
         }
     }
@@ -51,7 +53,7 @@ public class Client_collection extends Collection {
                 return;
             } else {
                 if (amount <= x.bankAccount.getBalance()) {
-                    x.bankAccount.setBalance(x.getAccount().getBalance() - amount);
+                    x.bankAccount.setBalance(x.bankAccount.getBalance() - amount);
                     System.out.println("Bill payment successful. Updated balance: $" + x.bankAccount.getBalance());
                 } else
                     System.out.println("Error: Insufficient funds to pay the bill.");
@@ -62,7 +64,7 @@ public class Client_collection extends Collection {
                 return;
             } else {
                 if (amount <= x.walletAccount.getBalance()) {
-                    x.walletAccount.setBalance(x.getAccount().getBalance() - amount);
+                    x.walletAccount.setBalance(x.walletAccount.getBalance() - amount);
                     System.out.println("Bill payment successful. Updated balance: $" + x.walletAccount.getBalance());
                 } else
                     System.out.println("Error: Insufficient funds to pay the bill.");
@@ -77,7 +79,7 @@ public class Client_collection extends Collection {
         System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
         choice = scanner.nextInt();
         if (choice == 1) {
-            if (current_Client.bankAccount.getCardNum().equals("")) {
+            if (!current_Client.bankAccount.isActive()) {
                 System.out.println("You don't have a bank account");
                 return;
             } else {
@@ -86,7 +88,7 @@ public class Client_collection extends Collection {
             }
         }
         if (choice == 2) {
-            if (current_Client.walletAccount.isActive()) {
+            if (!current_Client.walletAccount.isActive()) {
                 System.out.println("You don't have a wallet account");
                 return;
             } else {

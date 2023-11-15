@@ -12,6 +12,5 @@ public class Main {
         DataBase db = new DataBase();
         Instapay_system instapay_system = new Instapay_system(api, db);
         instapay_system.run();
-
     }
 }

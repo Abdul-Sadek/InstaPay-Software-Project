@@ -1,11 +1,12 @@
 package Utilities;
 
+import UserPackage.Client;
 import UserPackage.User;
 
 public class WaterBill extends Bill{
-    // Constructor
-    public WaterBill() {
-        this.generatorTax = 2.0;
+    // parameterized constructor
+    public WaterBill(double amount, BillType type, String date, double generator, Client receiver, boolean isPaid) {
+        super(amount, type, date, generator, receiver, isPaid);
     }
     @Override
     public double calculateBill() {

@@ -1,5 +1,6 @@
 package System;
 
+import UserPackage.AccountType;
 import UserPackage.Admin;
 import UserPackage.Client;
 import UserPackage.User;
@@ -11,7 +12,7 @@ public interface RegisterationValidator {
 
 
     //client registeration
-    public static Client Register_client(List<User> users){
+    public static Client Register_client(List<Client> users){
         System.out.println("..........");
         System.out.println("Enter username and password to register:");
         Scanner scanner = new Scanner(System.in);
@@ -31,6 +32,11 @@ public interface RegisterationValidator {
         address = scanner.nextLine();
         phoneNumber = scanner.nextLine();
         Client user = new Client(username, password, name, email, address, phoneNumber);
+        user.getAccount().setName(username);
+        user.getAccount().setPassword(password);
+        user.getAccount().setEmail(email);
+        user.getAccount().setMobileNumber(phoneNumber);
+        user.getAccount().setType(AccountType.CLIENT);
         users.add(user);
         System.out.println("User registered successfully");
         return user;
@@ -76,7 +82,7 @@ public interface RegisterationValidator {
         return null;
     }
     //login client
-    public static Client Login_client(List<User> users){
+    public static Client Login_client(List<Client> users){
         System.out.println("..........");
         System.out.println("Enter username and password to login:");
         Scanner scanner = new Scanner(System.in);

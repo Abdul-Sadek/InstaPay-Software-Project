@@ -3,25 +3,31 @@ package UserPackage;
 public class AdminAccount {
     private int adminID;
     private int accountNumber;
-    protected AccountType type;
-
+    private AccountType type;
 
     public AdminAccount() {
-        adminID = 1;
-        accountNumber = 1;
-        // set the account type to admin
-        type = AccountType.ADMIN;
+        this.adminID = 1;
+        this.accountNumber = 1;
+        this.type = AccountType.ADMIN;
     }
+
     public void setAdminID(int adminID) {
         this.adminID = adminID;
     }
+
     public void setAccountNumber(int accountNumber) {
         this.accountNumber = accountNumber;
     }
-    public int getAdminID(AdminAccount account) {
-        return account.adminID;
+
+    public int getAdminID() {
+        return adminID;
     }
-    public int getAccountNumber(AdminAccount account) {
-        return account.accountNumber;
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public AccountType getType() {
+        return type;
     }
 }

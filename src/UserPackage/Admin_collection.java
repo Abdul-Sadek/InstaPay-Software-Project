@@ -137,26 +137,25 @@ public class Admin_collection extends Collection {
         int choice = scanner.nextInt();
 
         switch (choice) {
-            case 1:
+            case 1 -> {
                 System.out.println("Enter new Balance:");
                 double newBalance = scanner.nextDouble();
                 walletAccount.setBalance(newBalance);
                 System.out.println("Balance updated.");
-                break;
-            case 2:
+            }
+            case 2 -> {
                 System.out.println("Enter new Wallet Provider:");
                 String newWalletProvider = scanner.next();
                 walletAccount.setWalletProvider(newWalletProvider);
                 System.out.println("Wallet Provider updated.");
-                break;
-            case 3:
+            }
+            case 3 -> {
                 System.out.println("Enter new Wallet Account Number:");
                 int newWalletAccountNumber = scanner.nextInt();
                 walletAccount.setWalletAccountNumber(newWalletAccountNumber);
                 System.out.println("Wallet Account Number updated.");
-                break;
-            default:
-                System.out.println("Invalid choice.");
+            }
+            default -> System.out.println("Invalid choice.");
         }
 
         scanner.close(); // Close the scanner

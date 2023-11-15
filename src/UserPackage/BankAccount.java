@@ -1,54 +1,60 @@
 package UserPackage;
 
 public class BankAccount extends Account {
-    private String card_num;
-    private String user_name;
-    private String bank_bass;
+    private String cardNum;
+    private String userName;
+    private String bankBass;
     private boolean isActive;
+
+    // Default constructor
+    public BankAccount() {
+        super();
+        this.cardNum = "";
+        this.userName = "";
+        this.bankBass = "";
+        this.isActive = false; // Default value for isActive
+    }
+
+    // Parameterized constructor
+    public BankAccount(String mobileNumber, String password, String name, String email, String cardNum, String userName, String bankBass) {
+        super(mobileNumber, password, name, email);
+        this.cardNum = cardNum;
+        this.userName = userName;
+        this.bankBass = bankBass;
+        this.isActive = true; // Assuming a new bank account is active by default
+    }
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getBankBass() {
+        return bankBass;
+    }
 
     public boolean isActive() {
         return isActive;
     }
 
-    // default constructor
-    public BankAccount() {
-        super();
-        card_num = "";
-        user_name = "";
-        bank_bass = "";
-    }
-
-    // parameterized constructor
-    public BankAccount(String mobileNumber, String password, String name, String email, String card_num, String user_name, String bank_bass) {
-        super(mobileNumber, password, name, email);
-        this.card_num = card_num;
-        this.user_name = user_name;
-        this.bank_bass = bank_bass;
-    }
-
-    public String getCardNum() {
-        return card_num;
-    }
-
-    public String getUserName() {
-        return user_name;
-    }
-
-    public String getBankBass() {
-        return bank_bass;
-    }
-
     // Setter methods
-    public void setCardNum(String cardnum) {
-        this.card_num = cardnum;
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
     }
 
-    public void setUserName(String username) {
-        this.user_name = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setBankBass(String bankbass) {
-        this.bank_bass = bankbass;
+    public void setBankBass(String bankBass) {
+        this.bankBass = bankBass;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public void print() {
@@ -56,10 +62,11 @@ public class BankAccount extends Account {
         System.out.println("Name: " + getName());
         System.out.println("Mobile Number: " + getMobileNumber());
         System.out.println("Email: " + getEmail());
-        System.out.println("Card Number: " + card_num);
-        System.out.println("Username: " + user_name);
-        System.out.println("Bank Name: " + bank_bass);
+        System.out.println("Card Number: " + cardNum);
+        System.out.println("Username: " + userName);
+        System.out.println("Bank Name: " + bankBass);
         System.out.println("Balance: " + getBalance());
+        System.out.println("Active: " + isActive);
         System.out.println("-------------------------------");
     }
 }

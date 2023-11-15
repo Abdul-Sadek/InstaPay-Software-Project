@@ -4,40 +4,32 @@ public class WalletAccount {
     private double balance;
     private String walletProvider;
     private int walletAccountNumber;
-    protected AccountType type;
+    private AccountType type;
     private boolean isActive;
 
     public boolean isActive() {
         return isActive;
     }
+
+    // Default constructor
     public WalletAccount() {
-        balance = 0;
-        walletProvider = "";
-        walletAccountNumber = 0;
-        type = AccountType.WALLET;
+        this.balance = 0;
+        this.walletProvider = "";
+        this.walletAccountNumber = 0;
+        this.type = AccountType.WALLET;
+        this.isActive = true; // Assuming a new wallet account is active by default
     }
 
-    public void setBalance(double balance) {
+    // Parameterized constructor
+    public WalletAccount(double balance, String walletProvider, int walletAccountNumber, boolean isActive) {
         this.balance = balance;
-    }
-
-    public void setWalletProvider(String walletProvider) {
         this.walletProvider = walletProvider;
-    }
-
-    public void setWalletAccountNumber(int walletAccountNumber) {
         this.walletAccountNumber = walletAccountNumber;
+        this.type = AccountType.WALLET;
+        this.isActive = isActive;
     }
 
-    // get the wallet provider
-    public String getWalletProvider() {
-        return walletProvider;
-    }
-
-    // get the wallet account number
-    public int getWalletAccountNumber() {
-        return walletAccountNumber;
-    }
+    // Getter and setter methods for other fields
 
     public void print() {
         System.out.println("Wallet Account Information:");
@@ -45,7 +37,6 @@ public class WalletAccount {
         System.out.println("Wallet Provider: " + walletProvider);
         System.out.println("Wallet Account Number: " + walletAccountNumber);
         System.out.println("Account Type: " + type);
+        System.out.println("Active: " + isActive);
     }
-
-
 }

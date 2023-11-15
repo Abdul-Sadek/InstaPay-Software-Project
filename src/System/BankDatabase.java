@@ -5,6 +5,13 @@ import java.util.Map;
 public class BankDatabase {
 
     private Map<String, Double> accounts;
+    public BankDatabase(){
+        accounts.put("unmrz1111unmrz123", 2000.0);
+        accounts.put("snjml1112snjml123", 5000.0);
+        accounts.put("noqb1113noqb123", 12000.0);
+        accounts.put("uraq1114uraq123", 20200.0);
+
+    }
     public boolean AccountExist(String Api_key) {
         return accounts.containsKey(Api_key);
     }

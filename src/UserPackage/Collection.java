@@ -1,17 +1,32 @@
 package UserPackage;
 
 public class Collection {
-    public void view_profile(User x) {
-        System.out.println(
-                "Username : " + x.getName() + "\n" + "User ID : " + x.getUserId() + "\n" + "User type : " + x.getType() + '\n'
-        );
-        for (Account account : x.getAccounts()) {
-            System.out.println("Account Type: " + account.getType());
-            System.out.println("Mobile Number: " + account.getMobileNumber());
-            System.out.println("Email: " + account.getEmail());
-        }
-        for (String i : x.getPermissions()) {
-            System.out.println(i);
+    public void viewProfile(User user) {
+        System.out.println("Username: " + user.getName());
+        System.out.println("User ID: " + user.getUserId());
+        System.out.println("User Type: " + user.getType());
+        System.out.println("Permissions:");
+        for (String permission : user.getPermissions()) {
+            System.out.println(permission);
         }
     }
+
+    public void viewProfile(Client user) {
+        BankAccount account = user.bankAccount;
+        WalletAccount acc = user.walletAccount;
+        System.out.println("Username: " + user.getName());
+        System.out.println("User ID: " + user.getUserId());
+        System.out.println("User Type: " + user.getType());
+        if (account.isActive()) {
+            account.print();
+        }
+        if(acc.isActive()){
+            acc.print();
+        }
+        System.out.println("Permissions:");
+        for (String permission : user.getPermissions()) {
+            System.out.println(permission);
+        }
+    }
+
 }

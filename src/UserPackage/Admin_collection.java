@@ -57,7 +57,7 @@ public class Admin_collection extends Collection {
     }
 
     private void show_user_data(User user) {
-        user.x.view_profile(user);
+        user.x.viewProfile(user);
     }
 
     private User findUserByid(List<User> users, int id) {

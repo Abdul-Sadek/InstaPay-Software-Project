@@ -3,6 +3,11 @@ package System;
 public class API_System {
     BankDatabase Bank;
 
+    // default constructor
+    public API_System(){
+        Bank=new BankDatabase();
+    }
+
     public API_System(BankDatabase ba){
         Bank=ba;
     }

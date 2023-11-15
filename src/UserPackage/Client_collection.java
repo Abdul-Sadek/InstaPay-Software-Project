@@ -1,27 +1,18 @@
 package UserPackage;
+
+import System.*;
+
+import java.util.List;
+import java.util.Scanner;
+
 import System.BankAuthenticator;
 
-import java.util.Objects;
-import java.util.Scanner;
-import System.BankAuthenticator;
 public class Client_collection extends Collection {
-    BankAuthenticator ba;
-    Client current_Client;
     Scanner scanner = new Scanner(System.in);
 
-    // default constructor
-    public Client_collection() {
-        this.current_Client = new Client();
-    }
+    //sync with bank api
 
-    // constructor
-    public Client_collection(Client current_Client){
-        this.current_Client=current_Client;
-    }
-    public Client_collection(BankAuthenticator ba){
-        this.ba=ba;
-    }
-    public void sync_with_bank_api() {
+    public void sync_with_bank_api(Client current_Client, BankAuthenticator ba) {
 
         System.out.print("Enter card number: ");
         String card_num = scanner.nextLine();
@@ -39,78 +30,138 @@ public class Client_collection extends Collection {
         }
     }
 
-    public double inquire_balance(Account account) {
+    public double inquire_bank_balance(BankAccount account) {
         return account.getBalance();
     }
 
-    public void pay_bill(Account account, double amount) {
+    public double inquire_wallet_balance(WalletAccount account) {
+        return account.getBalance();
+    }
+
+    public void pay_bill(double amount, Client x) {
         if (amount < 0) {
             System.out.println("Error: Bill amount must be non-negative.");
             return;
         }
-
-        if (amount > account.getBalance()) {
-            System.out.println("Error: Insufficient funds to pay the bill.");
-            return;
+        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            if (!x.bankAccount.isActive()) {
+                System.out.println("You don't have a bank account");
+                return;
+            } else {
+                if (amount <= x.bankAccount.getBalance()) {
+                    x.bankAccount.setBalance(x.getAccount().getBalance() - amount);
+                    System.out.println("Bill payment successful. Updated balance: $" + x.bankAccount.getBalance());
+                } else
+                    System.out.println("Error: Insufficient funds to pay the bill.");
+            }
+        } else if (choice == 2) {
+            if (!x.walletAccount.isActive()) {
+                System.out.println("You don't have a wallet account");
+                return;
+            } else {
+                if (amount <= x.walletAccount.getBalance()) {
+                    x.walletAccount.setBalance(x.getAccount().getBalance() - amount);
+                    System.out.println("Bill payment successful. Updated balance: $" + x.walletAccount.getBalance());
+                } else
+                    System.out.println("Error: Insufficient funds to pay the bill.");
+            }
         }
-
-//        BankAccount.setBalance(BankAccount.getBalance() - amount);
-//        current_Client.getbankAccounts()
-
-        System.out.println("Bill payment successful. Updated balance: $" + account.getBalance());
     }
 
 
-    public void withdraw(double amount) {
+    public void withdraw(Client current_Client, double amount, BankAuthenticator ba) {
         AccountType type;
         int choice;
-        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc" );
-        choice= scanner.nextInt();
-        if(choice==1){
-            if(current_Client.bankAccount.getCardNum().equals("")) {
+        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
+        choice = scanner.nextInt();
+        if (choice == 1) {
+            if (current_Client.bankAccount.getCardNum().equals("")) {
                 System.out.println("You don't have a bank account");
                 return;
-            }
-            else {
-                ba.withdraw_money(current_Client.bankAccount,amount);
+            } else {
+                ba.withdraw_money(current_Client.bankAccount, amount);
                 current_Client.bankAccount.setBalance(current_Client.bankAccount.getBalance() + amount);
             }
         }
+        if (choice == 2) {
+            if (current_Client.walletAccount.isActive()) {
+                System.out.println("You don't have a wallet account");
+                return;
+            } else {
+                if (current_Client.walletAccount.withdraw(amount)){
+                    System.out.println("Withdrawal successful. Updated balance: $" + current_Client.walletAccount.getBalance());
+                }
+                else
+                    System.out.println("Error: Insufficient funds to withdraw the specified amount.");
+            }
+        }
     }
 
-    public void deposit(Account account, double amount) {
+    public void deposit(Client X, double amount) {
         if (amount < 0) {
             System.out.println("Error: Deposit amount must be non-negative.");
             return;
         }
-
-        double currentBalance = account.getBalance();
-
-        current_Client.bankAccount.setBalance(currentBalance + amount);
-
-        System.out.println("Deposit successful. Updated balance: $" + account.getBalance());
+        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            if (!X.bankAccount.isActive()) {
+                System.out.println("You don't have a bank account");
+                return;
+            } else {
+                X.bankAccount.setBalance(X.bankAccount.getBalance() + amount);
+                System.out.println("Deposit successful. Updated balance: $" + X.bankAccount.getBalance());
+            }
+        } else if (choice == 2) {
+            if (!X.walletAccount.isActive()) {
+                System.out.println("You don't have a wallet account");
+                return;
+            } else {
+                X.walletAccount.setBalance(X.walletAccount.getBalance() + amount);
+                System.out.println("Deposit successful. Updated balance: $" + X.walletAccount.getBalance());
+            }
+        }
     }
-
-    public void transfer_money(double amount, Account sourceAccount, Account destinationAccount) {
+    //transfer money from one account to another
+    public void transfer_money(Client Source, Client Target, double amount) {
         if (amount < 0) {
             System.out.println("Error: Transfer amount must be non-negative.");
             return;
         }
-
-        if (amount > sourceAccount.getBalance()) {
-            System.out.println("Error: Insufficient funds to transfer the specified amount.");
-            return;
+        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            if (!Source.bankAccount.isActive()) {
+                System.out.println("You don't have a bank account");
+                return;
+            } else {
+                if (amount <= Source.bankAccount.getBalance()) {
+                    Source.bankAccount.setBalance(Source.bankAccount.getBalance() - amount);
+                    Target.bankAccount.setBalance(Target.bankAccount.getBalance() + amount);
+                    System.out.println("Transfer successful. Updated balance: $" + Source.bankAccount.getBalance());
+                } else
+                    System.out.println("Error: Insufficient funds to transfer the specified amount.");
+            }
+        } else if (choice == 2) {
+            if (!Source.walletAccount.isActive()) {
+                System.out.println("You don't have a wallet account");
+                return;
+            } else {
+                if (amount <= Source.walletAccount.getBalance()) {
+                    Source.walletAccount.setBalance(Source.walletAccount.getBalance() - amount);
+                    Target.walletAccount.setBalance(Target.walletAccount.getBalance() + amount);
+                    System.out.println("Transfer successful. Updated balance: $" + Source.walletAccount.getBalance());
+                } else
+                    System.out.println("Error: Insufficient funds to transfer the specified amount.");
+            }
         }
-
-        sourceAccount.setBalance(sourceAccount.getBalance() - amount);
-
-        destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-
-        System.out.println("Transfer successful. Updated balances - Source: $" + sourceAccount.getBalance() +
-                ", Destination: $" + destinationAccount.getBalance());
     }
 
-    public void run(Account account) {
+
+
+    public void run(Client account, BankAuthenticator ba, WalletAuthenticator wa, List<Client> clients) {
 
         System.out.println("Choose an action:");
         System.out.println("1. Synchronize with bank API");
@@ -123,17 +174,17 @@ public class Client_collection extends Collection {
         int choice = scanner.nextInt();
 
         switch (choice) {
-            case 1 -> sync_with_bank_api();
+            case 1 -> sync_with_bank_api(account, ba);
             case 2 -> System.out.println("Current balance: $" + inquire_balance(account));
             case 3 -> {
                 System.out.println("Enter bill amount:");
                 double billAmount = scanner.nextDouble();
-                pay_bill(account, billAmount);
+                pay_bill(billAmount, account);
             }
             case 4 -> {
                 System.out.println("Enter withdrawal amount:");
                 double withdrawalAmount = scanner.nextDouble();
-                withdraw(withdrawalAmount);
+                withdraw(account, withdrawalAmount, ba);
             }
             case 5 -> {
                 System.out.println("Enter deposit amount:");
@@ -141,14 +192,51 @@ public class Client_collection extends Collection {
                 deposit(account, depositAmount);
             }
             case 6 -> {
-                System.out.println("Enter transfer amount:");
+               //transfer money from one account to another
+                System.out.println("Enter the amount you want to transfer:");
                 double transferAmount = scanner.nextDouble();
-                System.out.println("Enter destination account details:");
-                // Simulate getting destination account details (replace this with your actual logic)
-                Account destinationAccount = new Account();
-                transfer_money(transferAmount, account, destinationAccount);
+                System.out.println("Enter the account number of the target account:");
+                String targetAccountNumber = scanner.next();
+                Client targetAccount = null;
+                for (Client client : clients) {
+                    if (client.bankAccount.getCardNum().equals(targetAccountNumber)) {
+                        targetAccount = client;
+                        break;
+                    }
+                }
+                if (targetAccount == null) {
+                    System.out.println("Error: Target account not found.");
+                    return;
+                }
+                transfer_money(account, targetAccount, transferAmount);
             }
             default -> System.out.println("Invalid choice. Please choose a valid action.");
+        }
+    }
+
+    private double inquire_balance(Client account) {
+        x:
+        System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
+        int choice = scanner.nextInt();
+        if (choice == 1) {
+            if (!account.bankAccount.isActive()) {
+                System.out.println("You don't have a bank account");
+                return 0;
+            } else {
+                return account.bankAccount.getBalance();
+            }
+        }
+        else if (choice == 2) {
+            if (!account.walletAccount.isActive()) {
+                System.out.println("You don't have a wallet account");
+                return 0;
+            } else {
+                return account.walletAccount.getBalance();
+            }
+        }
+        else{
+            System.out.println("Invalid choice. Please choose a valid action.");
+            return 0;
         }
     }
 }

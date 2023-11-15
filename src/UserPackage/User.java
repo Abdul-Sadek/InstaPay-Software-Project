@@ -10,6 +10,7 @@ public class User {
     private String[] permissions;
     private Account account;
 
+
     // default constructor
     public User() {
         name = "";
@@ -55,14 +56,11 @@ public class User {
     public void setUserId(int user_id) {
         this.user_id = user_id;
     }
-//    public void Add_Acc(Account acc){
-//        for (int i = 0; i < accounts.length; i++) {
-//            if (accounts[i] == null) {
-//                accounts[i] = acc;
-//                break;
-//            }
-//        }
-//    }
+
+    //get account
+    public Account getAccount() {
+        return account;
+    }
 
     public String[] getPermissions() {
         return permissions;
@@ -71,16 +69,5 @@ public class User {
     public void setPermissions(String[] permissions) {
         this.permissions = permissions;
     }
-//    public Account[] getAccounts() {
-//        return accounts;
-//    }
-//    public BankAccount[] getbankAccounts() {
-//        List<BankAccount> banks = new ArrayList<>();
-//       for(Account acc:accounts){
-//           if(acc.getType()==AccountType.BANK_ACCOUNT){
-//               banks.add((BankAccount) acc);
-//           }
-//       }
-//        return banks.toArray(new BankAccount[0]);
-//    }
+
 }

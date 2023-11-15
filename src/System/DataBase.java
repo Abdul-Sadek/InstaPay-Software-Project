@@ -2,9 +2,12 @@ package System;
 
 import UserPackage.Admin;
 import UserPackage.Client;
+import UserPackage.User;
 import Utilities.Bill;
 import Utilities.BillType;
 import Utilities.GasBill;
+
+import java.util.List;
 
 public class DataBase {
     private final Client[] clients;
@@ -108,5 +111,21 @@ public class DataBase {
                 break;
             }
         }
+    }
+
+    public List<User> getClients() {
+        return List.of(clients);
+    }
+
+    public Bill[] getBills() {
+        return bills;
+    }
+
+    public String[] getSystemLogs() {
+        return systemLogs;
+    }
+
+    public List<Admin> getAdmins() {
+        return List.of(admins);
     }
 }

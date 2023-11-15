@@ -8,6 +8,8 @@ public class Admin extends User{
 
     public Admin_collection functionalities = new Admin_collection();
 
+    //
+
     // parameterized constructor
     public Admin(String name, String username, String password) {
         super(name, username, password);

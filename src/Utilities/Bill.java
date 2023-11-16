@@ -5,7 +5,7 @@ import UserPackage.User;
 
 public abstract class Bill {
     protected double amount;
-    protected BillType type;
+    protected final BillType type;
     protected String date;
     protected double generatorTax;
     protected User receiver;

@@ -1,6 +1,4 @@
 package UserPackage;
-import java.util.List;
-import java.util.ArrayList;
 
 public class User {
     private String name;
@@ -8,7 +6,7 @@ public class User {
     private String type;
     private int user_id;
     private String[] permissions;
-    private Account account;
+    private final Account account;
 
 
     // default constructor

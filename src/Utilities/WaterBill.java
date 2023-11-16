@@ -1,7 +1,6 @@
 package Utilities;
 
 import UserPackage.Client;
-import UserPackage.User;
 
 public class WaterBill extends Bill{
     // parameterized constructor

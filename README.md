@@ -44,7 +44,7 @@ Feel free to fork the repository and create pull requests for improvements or ad
 
 The InstaPay project is developed with contributions from the following team members working with Agile SDLC method:
 - [Hend Ahmad](https://github.com/LifelongLearner-HEND)
-- [AbdEl-Rahman-Fawzy](https://github.com/AbdEl-Rahman-Fawzy)
+- [Abd-El Rahman Fawzy](https://github.com/AbdEl-Rahman-Fawzy)
 - [Hazem Nasser](https://github.com/hazemnasser1)
 - [Abdullah Ashraf](https://github.com/Abdul-Sadek)
 

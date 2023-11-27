@@ -1,10 +1,10 @@
-package UserPackage;
+package Utilities.UserPackage;
 public class Client extends User {
-    private final String address;
-    private final String phoneNumber;
-    private final String email;
-    protected final BankAccount bankAccount;
-    protected final WalletAccount walletAccount;
+    private String address;
+    private String phoneNumber;
+    private String email;
+    protected BankAccount bankAccount;
+    public WalletAccount walletAccount;
 
     // default constructor
     public Client() {
@@ -25,5 +25,5 @@ public class Client extends User {
         this.bankAccount = new BankAccount();
         this.walletAccount = new WalletAccount();
     }
-    public final Client_collection functionalities = new Client_collection();
+    public Client_collection functionalities = new Client_collection();
 }

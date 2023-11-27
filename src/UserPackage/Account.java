@@ -1,4 +1,4 @@
-package UserPackage;
+package Utilities.UserPackage;
 
 public class Account {
     private String mobileNumber;
@@ -57,6 +57,14 @@ public class Account {
             this.email = email;
         }
     }
+
+//    public double getBalance() {
+//        return balance;
+//    }
+
+//    public void setBalance(double initialBalance) {
+//        this.balance = initialBalance;
+//    }
 
     public AccountType getType() {
         return type;

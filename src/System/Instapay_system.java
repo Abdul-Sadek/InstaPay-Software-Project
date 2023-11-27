@@ -1,14 +1,15 @@
 package System;
 
-import UserPackage.Admin;
-import UserPackage.Client;
+import Utilities.UserPackage.Admin;
+import Utilities.UserPackage.Client;
 
 import java.util.Scanner;
 
 public class Instapay_system {
-    private final BankAuthenticator authenticator;
-    private final DataBase db;
+    private BankAuthenticator authenticator;
+    private DataBase db;
     private RegisterationValidator registerationValidator;
+    private API_System api;
     private Client client;
     private Admin admin;
 
@@ -96,6 +97,7 @@ public class Instapay_system {
     }
 
     public Instapay_system(API_System api, DataBase db) {
+        this.api =api ;
         this.authenticator = new BankAuthenticator(api);
         this.db = db;
 

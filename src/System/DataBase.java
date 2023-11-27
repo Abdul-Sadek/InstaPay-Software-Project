@@ -1,8 +1,9 @@
 package System;
 
-import UserPackage.Admin;
-import UserPackage.Client;
+import Utilities.UserPackage.Admin;
+import Utilities.UserPackage.Client;
 import Utilities.*;
+import Utilities.UserPackage.WalletAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +21,17 @@ public class DataBase {
         systemLogs = new ArrayList<>();
         admins = new ArrayList<>();
         // String mobileNumber, String password, String name, String email, String address, String phoneNumber
-        Client client1 = new Client("1234567890", "password1", "John Doe", "john@example.com", "123 Main St", "9876543210");
+        Client client1 = new Client("1234567890", "password1", "JohnDoe", "john@example.com", "123 Main St", "9876543210");
         Client client2 = new Client("9876543210", "password2", "Alice Smith", "alice@example.com", "456 Elm St", "1234567890");
         Client client3 = new Client("1112223333", "password3", "Bob Johnson", "bob@example.com", "789 Oak St", "5556667777");
-
         // Adding the sample clients to the database
+
         addClient(client1);
         addClient(client2);
         addClient(client3);
+        client1.walletAccount=new WalletAccount(500.0, "Provider A", 123456, true);
+        client2.walletAccount = new WalletAccount(1000.0, "Provider B", 789012, true);
+        client3.walletAccount = new WalletAccount(250.0, "Provider C", 345678, false);
 
        //  double amount, BillType type, String date, double generator, User receiver, boolean isPaid
         Bill bill1 = new GasBill(100, BillType.GAS, "2021-01-01", 0.1, client1, false);

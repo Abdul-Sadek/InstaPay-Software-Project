@@ -1,11 +1,11 @@
 package Utilities;
 
-import UserPackage.Client;
-import UserPackage.User;
+import Utilities.UserPackage.Client;
+import Utilities.UserPackage.User;
 
 public abstract class Bill {
     protected double amount;
-    protected final BillType type;
+    protected BillType type;
     protected String date;
     protected double generatorTax;
     protected User receiver;

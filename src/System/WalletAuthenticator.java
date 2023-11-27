@@ -1,10 +1,11 @@
 package System;
 
-public class WalletAuthenticator {
-    private String generatedOTP; // To store the generated OTP
+import java.util.Scanner;
 
-    // Method to generate a fake OTP and send it to the user's mobile number
-    public void authenticate(String mobileNumber) {
+public class WalletAuthenticator {
+    private String generatedOTP;
+    Scanner scanner=new Scanner(System.in);
+    public void generate_otp(String mobileNumber) {
         generatedOTP = generateFakeOTP();
         System.out.println("OTP sent to " + mobileNumber + ": " + generatedOTP);
     }
@@ -23,7 +24,14 @@ public class WalletAuthenticator {
         int randomOTP = (int) (Math.random() * 900000) + 100000;
         return String.valueOf(randomOTP);
     }
-    public boolean authenticate(String username,String password,String card_num) {
-        return verifyOTP(generatedOTP);
+    public boolean authenticate(String mobile) {
+        generate_otp(mobile);
+        String otp= scanner.nextLine();
+        if(verifyOTP(otp)){
+            System.out.println("verified successfully");
+            return true;
+        }
+        return false;
+
     }
 }

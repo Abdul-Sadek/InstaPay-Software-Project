@@ -1,4 +1,4 @@
-package UserPackage;
+package Utilities.UserPackage;
 
 public class User {
     private String name;
@@ -6,7 +6,7 @@ public class User {
     private String type;
     private int user_id;
     private String[] permissions;
-    private final Account account;
+    private Account account;
 
 
     // default constructor

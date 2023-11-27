@@ -1,7 +1,7 @@
 package System;
 
 public class API_System {
-    final BankDatabase Bank;
+    BankDatabase Bank;
 
     // default constructor
     public API_System(){
@@ -12,7 +12,10 @@ public class API_System {
         Bank=ba;
     }
     public boolean checkexist(String user_n,String pass,String card_num){
-        return Bank.AccountExist(generate_api_key(user_n, pass, card_num));
+        if(Bank.AccountExist(generate_api_key(user_n,pass,card_num))){
+            return true;
+        }
+        return false;
     }
     public String generate_api_key(String user_n,String pass,String card_num){
         String input=user_n+card_num+pass;
@@ -31,6 +34,9 @@ public class API_System {
         return sb.toString();
     }
     public boolean check_bank(double amount,String user_n,String pass,String card_num){
-        return Bank.updateBalance(generate_api_key(user_n, pass, card_num), amount);
+        if(Bank.updateBalance(generate_api_key(user_n,pass,card_num),amount)){
+            return true;
+        }
+        return false;
     }
 }

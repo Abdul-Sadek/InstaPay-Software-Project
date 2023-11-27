@@ -1,12 +1,14 @@
-package UserPackage;
+package Utilities.UserPackage;
 
 import System.*;
 
 import java.util.List;
 import java.util.Scanner;
 
+import System.BankAuthenticator;
+
 public class Client_collection extends Collection {
-    final Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
     //sync with bank api
 
@@ -48,6 +50,7 @@ public class Client_collection extends Collection {
         if (choice == 1) {
             if (!x.bankAccount.isActive()) {
                 System.out.println("You don't have a bank account");
+                return;
             } else {
                 if (amount <= x.bankAccount.getBalance()) {
                     x.bankAccount.setBalance(x.bankAccount.getBalance() - amount);
@@ -58,6 +61,7 @@ public class Client_collection extends Collection {
         } else if (choice == 2) {
             if (!x.walletAccount.isActive()) {
                 System.out.println("You don't have a wallet account");
+                return;
             } else {
                 if (amount <= x.walletAccount.getBalance()) {
                     x.walletAccount.setBalance(x.walletAccount.getBalance() - amount);
@@ -86,6 +90,7 @@ public class Client_collection extends Collection {
         if (choice == 2) {
             if (!current_Client.walletAccount.isActive()) {
                 System.out.println("You don't have a wallet account");
+                return;
             } else {
                 if (current_Client.walletAccount.withdraw(amount)){
                     System.out.println("Withdrawal successful. Updated balance: $" + current_Client.walletAccount.getBalance());
@@ -106,6 +111,7 @@ public class Client_collection extends Collection {
         if (choice == 1) {
             if (!X.bankAccount.isActive()) {
                 System.out.println("You don't have a bank account");
+                return;
             } else {
                 X.bankAccount.setBalance(X.bankAccount.getBalance() + amount);
                 System.out.println("Deposit successful. Updated balance: $" + X.bankAccount.getBalance());
@@ -113,11 +119,18 @@ public class Client_collection extends Collection {
         } else if (choice == 2) {
             if (!X.walletAccount.isActive()) {
                 System.out.println("You don't have a wallet account");
+                return;
             } else {
                 X.walletAccount.setBalance(X.walletAccount.getBalance() + amount);
                 System.out.println("Deposit successful. Updated balance: $" + X.walletAccount.getBalance());
             }
         }
+    }
+    public void sync_with_wallet_acc(Client account,WalletAuthenticator wa){
+        if(wa.authenticate(account.getAccount().getMobileNumber())){
+            account.walletAccount.setActive(true);
+        }
+        else System.out.println("incorrect otp");
     }
     //transfer money from one account to another
     public void transfer_money(Client Source, Client Target, double amount) {
@@ -130,6 +143,7 @@ public class Client_collection extends Collection {
         if (choice == 1) {
             if (!Source.bankAccount.isActive()) {
                 System.out.println("You don't have a bank account");
+                return;
             } else {
                 if (amount <= Source.bankAccount.getBalance()) {
                     Source.bankAccount.setBalance(Source.bankAccount.getBalance() - amount);
@@ -141,6 +155,7 @@ public class Client_collection extends Collection {
         } else if (choice == 2) {
             if (!Source.walletAccount.isActive()) {
                 System.out.println("You don't have a wallet account");
+                return;
             } else {
                 if (amount <= Source.walletAccount.getBalance()) {
                     Source.walletAccount.setBalance(Source.walletAccount.getBalance() - amount);
@@ -158,33 +173,35 @@ public class Client_collection extends Collection {
 
         System.out.println("Choose an action:");
         System.out.println("1. Synchronize with bank API");
-        System.out.println("2. Inquire balance");
-        System.out.println("3. Pay bill");
-        System.out.println("4. Withdraw");
-        System.out.println("5. Deposit");
-        System.out.println("6. Transfer money");
+        System.out.println("2. Synchronize with wallet account");
+        System.out.println("3. Inquire balance");
+        System.out.println("4. Pay bill");
+        System.out.println("5. Withdraw");
+        System.out.println("6. Deposit");
+        System.out.println("7. Transfer money");
 
         int choice = scanner.nextInt();
 
         switch (choice) {
             case 1 -> sync_with_bank_api(account, ba);
-            case 2 -> System.out.println("Current balance: $" + inquire_balance(account));
-            case 3 -> {
+            case 2 -> sync_with_wallet_acc(account,wa);
+            case 3 -> System.out.println("Current balance: $" + inquire_balance(account));
+            case 4 -> {
                 System.out.println("Enter bill amount:");
                 double billAmount = scanner.nextDouble();
                 pay_bill(billAmount, account);
             }
-            case 4 -> {
+            case 5 -> {
                 System.out.println("Enter withdrawal amount:");
                 double withdrawalAmount = scanner.nextDouble();
                 withdraw(account, withdrawalAmount, ba);
             }
-            case 5 -> {
+            case 6 -> {
                 System.out.println("Enter deposit amount:");
                 double depositAmount = scanner.nextDouble();
                 deposit(account, depositAmount);
             }
-            case 6 -> {
+            case 7 -> {
                //transfer money from one account to another
                 System.out.println("Enter the amount you want to transfer:");
                 double transferAmount = scanner.nextDouble();
@@ -208,6 +225,7 @@ public class Client_collection extends Collection {
     }
 
     private double inquire_balance(Client account) {
+        x:
         System.out.println("Enter the 1 if u want to use your bank acc and 2 for wallet acc");
         int choice = scanner.nextInt();
         if (choice == 1) {

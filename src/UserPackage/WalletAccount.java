@@ -1,4 +1,4 @@
-package UserPackage;
+package Utilities.UserPackage;
 
 public class WalletAccount {
     private double balance;

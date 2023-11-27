@@ -1,6 +1,6 @@
 package Utilities;
 
-import UserPackage.Client;
+import Utilities.UserPackage.Client;
 
 public class GasBill extends Bill{
 

@@ -1,8 +1,8 @@
 package System;
 
-import UserPackage.AccountType;
-import UserPackage.Admin;
-import UserPackage.Client;
+import Utilities.UserPackage.AccountType;
+import Utilities.UserPackage.Admin;
+import Utilities.UserPackage.Client;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public interface RegisterationValidator {
 
 
     //client registeration
-    static Client Register_client(List<Client> users){
+    public static Client Register_client(List<Client> users){
         System.out.println("..........");
         System.out.println("Enter username and password to register:");
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +41,7 @@ public interface RegisterationValidator {
         return user;
     }
     // admin registeration
-    static Admin Register_admin(List<Admin> users){
+    public static Admin Register_admin(List<Admin> users){
         System.out.println("..........");
         System.out.println("Enter username and password to register:");
         Scanner scanner = new Scanner(System.in);
@@ -64,7 +64,7 @@ public interface RegisterationValidator {
         return user;
     }
    //login admin
-    static Admin Login_admin(List<Admin> users){
+    public static Admin Login_admin(List<Admin> users){
         System.out.println("..........");
         System.out.println("Enter username and password to login:");
         Scanner scanner = new Scanner(System.in);
@@ -81,7 +81,7 @@ public interface RegisterationValidator {
         return null;
     }
     //login client
-    static Client Login_client(List<Client> users){
+    public static Client Login_client(List<Client> users){
         System.out.println("..........");
         System.out.println("Enter username and password to login:");
         Scanner scanner = new Scanner(System.in);

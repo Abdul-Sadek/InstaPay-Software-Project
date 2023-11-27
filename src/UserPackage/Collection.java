@@ -1,4 +1,4 @@
-package UserPackage;
+package Utilities.UserPackage;
 
 public class Collection {
     public void viewProfile(User user) {

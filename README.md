@@ -16,12 +16,12 @@ d. Paying utilities’ bills, where such bills can be for Gas, Electricity, or W
 
 ## System Requirements
 
-1. The user should be able to signup to the app in two ways:
+1. The user is able to signup to the app in two ways:
     - Register using his/her bank account and the registered mobile number on the bank so the app can verify it through the bank API.
     - Register using his mobile number with a wallet provided from a wallet provider as mentioned earlier; also, the mobile number should be verified first with the wallet provider.
       For both users, after verifying the bank account/wallet, the system should verify that the user owns the mobile number by sending OTP and then verifying it. Then he/she has to enter a username (unique through the system) and a complex password.
 
-2. User will be able to sign in to the system using his Instapay username and password. After logging in, the user's profile will be loaded based on his type.
+2. User is able to sign in to the system using his Instapay username and password. After logging in, the user's profile will be loaded based on his type.
 
 3. Both users have the option to:
     - Transfer to Wallet using the mobile number

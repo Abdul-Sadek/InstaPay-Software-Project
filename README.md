@@ -2,7 +2,7 @@
 
 This is a simple money transaction system simulating the real InstaPay application. The system allows users to perform money transfers or pay their bills conveniently.
 
-## System Services
+## InstaPay Services
 
 The services offered by the InstaPay Software System include:
 
@@ -14,7 +14,7 @@ c. Transfer To a Mobile Wallet through wallet providers: Wallet providers can be
 
 d. Paying utilities’ bills, where such bills can be for Gas, Electricity, or Water.
 
-## System Requirements
+## InstaPay Requirements
 
 1. The user is able to signup to the app in two ways:
     - Register using his/her bank account and the registered mobile number on the bank so the app can verify it through the bank API.
